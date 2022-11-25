@@ -13,11 +13,10 @@ class User(BaseModel):
         orm_mode = True
 
 
-class UserDescription(BaseModel):
-    name: str
-    email: str
-    role_description: str
-    claim_description: str
+class UserCreate(User):
+    id: int
 
-    class Config:
-        orm_mode = True
+
+class Role(BaseModel):
+    role_id: int
+    description: str
