@@ -20,8 +20,6 @@ services:
         build:
             dockerfile: ./docker/fastapi.dockerfile
             context: .
-        image: jkobayashi/fastapi
-        container_name: fastapi
         ports:
             - "8080:8080"
         networks:

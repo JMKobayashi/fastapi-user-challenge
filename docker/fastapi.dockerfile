@@ -1,8 +1,12 @@
 FROM python:3.11
 
-RUN pip install fastapi uvicorn pydantic sqlalchemy psycopg2 pytest
+ENV SQLALCHEMY_DATABASE_URL "postgresql://postgres:postgres@postgres:5432/postgres"
 
-EXPOSE 8080
+# COPY . /tmp/
+
+COPY requirements.txt /tmp/
+
+RUN pip install -r /tmp/requirements.txt
 
 COPY ./app /app
 
