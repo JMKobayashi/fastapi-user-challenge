@@ -1,15 +1,17 @@
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import BaseModel
+
 
 class User(BaseModel):
     name: str
     email: str
     role_id: int
     password: Optional[str] = ""
-    
+
     class Config:
         orm_mode = True
+
 
 class UserDescription(BaseModel):
     name: str

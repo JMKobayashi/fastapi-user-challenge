@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 
 from .database import Base
 
+
 class Users(Base):
     __tablename__ = "users"
 
@@ -17,6 +18,7 @@ class Users(Base):
     roles = relationship("Roles", back_populates="user_role")
     user_claims = relationship("UserClaims", back_populates="user")
 
+
 class Roles(Base):
     __tablename__ = "roles"
 
@@ -24,6 +26,7 @@ class Roles(Base):
     description = Column(String)
 
     user_role = relationship("Users", back_populates='roles')
+
 
 class UserClaims(Base):
     __tablename__ = "user_claims"
@@ -33,6 +36,7 @@ class UserClaims(Base):
 
     user = relationship("Users", back_populates="user_claims")
     claim = relationship("Claims", back_populates="claim_user")
+
 
 class Claims(Base):
     __tablename__ = "claims"

@@ -1,13 +1,14 @@
-from sqlalchemy import select
-from sqlalchemy.orm import Session, aliased
+from sqlalchemy.orm import Session
 
 
 from datetime import date
 
 from . import models, schemas
 
+
 def get_user_role(user_id: int, db: Session):
     return db.query(models.Users).filter_by(id=user_id).first()
+
 
 def create_user(user: schemas.User, db: Session):
     db_user = models.Users(**user.dict())
