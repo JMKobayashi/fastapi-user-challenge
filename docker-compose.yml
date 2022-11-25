@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+
+    postgres:
+        container_name: postgres_container
+        image: postgres
+        environment:
+          POSTGRES_USER: ${POSTGRES_USER:-postgres}
+          POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+          PGDATA: /data/postgres
+        volumes:
+           - postgres:/data/postgres
+        ports:
+          - "5432:5432"
+        networks:
+          - production-network
+        restart: unless-stopped
+
+    fastapi:
+        build:
+            dockerfile: ./docker/fastapi.dockerfile
+            context: .
+        image: jkobayashi/fastapi
+        container_name: fastapi
+        ports:
+            - "8080:8080"
+        networks:
+            - production-network
+        depends_on:
+          - postgres
+networks:
+    production-network:
+        driver: bridge
+
+volumes:
+    postgres:
+    pgadmin:
